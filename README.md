@@ -1,7 +1,7 @@
 # summarise_alignment_position
-Given a phylip alignment file, and assuming the reference is in the top line of the alignment, will calculate the start and stop (both gapped and ungapped) of all other sequences in the alignment relative to the reference
+Given a phylip alignment file, and assuming the reference is in the top line of the alignment, this will calculate the start and stop (both gapped and ungapped) of all other sequences in the alignment relative to the reference
 
-
+Your phylip file should look something like the following, with the reference sequence in the top row of the file. Names can conform to "relaxed phylip" standards (e.g. longer than 10 characters) as long as they are separated from the associated sequence by a space
 ```
  11731 1861
 AY188350.1 ATGGGAGAGTTTGATCCTGGCTCAGGACGAACGCTGGCGGCGTGCCTAATACATGCAAGTGGAACGCATTGATATCACCGGAGCTTGCTCCACTGATATTAATGAGTCGCGAACGGG-TGA-GTAACGCGTAGGTAACCTGCCTG-ATAG-CGGGGG-ATAACTATTGGAAACGAT-AGCTAA-T-A--CCGC-ATGAGAG-TGTT-TAAC-A-CA-TG-T-TAG---AGACT-TAAAAGAT---ACCATTG--TATCAC---TATCAGATGGACCTGCGTTGTATTAGCTAGTTGGTAGGG-TAGCGG-CCTACCAAGGCACC-GATACATAGCCGA-CCT-GA-GAGGG-TGATCGGCCA-CACTGGG-A-CTG-AGACACGG-CCCA-GA-CTCC-TACGGG-AGGCAGC-AGTAGGG-AATC-TT-CG--G-C-AATGGACGA-AA-G-TC-T-GACCGA-GCAA-CG-CCG-CG-TGA-GT-G-A-A-G-AA-GGT-T-T-T-C-G--G-A-TCG-TAAAG-C-TCT-GTT-G-TA-G-C-G-GA-AG-AA---C-GC-G--TG---TA-AG----A-GTG-G-AA-A-GT-T-T-A-C-AC-AG---T-GAC-GGTACGC-T-A-C-C-A-G-AAA-G-GG-AC-GG--C-T-AAC-TA-CGT-G-C-C-A-G-C-A-G-CC-GC-G-GT-AA-TACGTAGG-TC-C-C-GA--GCGTT-G-TCCGGAT-TT-ATT-GGG-CGT-AAA-GGGAGCGCA-GGCGGTT-T-AGT-AA-GTCT--GAAGTTAAA-GGCAT-TGG--CTCAACC-AA-TG-TA-T-GCTTTGGAAA-CTGTTAGA-C-TTGAGTGCAGAAGGGG-AGAG-TGGAATTCCATGTGTAG-C-GGTGAAATGC-GTA-GATATATGGAGGAACACCGGTGGCGAA-A-GCGGCTCT-CTGGTCTG--TCACTGACGCTG-AGGCTCGAAA-GCG-TGGGT-A-GCGAAC-AGGATTAG-ATACCC-T-GGT-AGTCCA-CGCCGTAAACGATGAGTGCTAGGTGTTAGGTCCTTTCCGGGACTTAGTGCCGCAGCTAACGCAATAAGCACTCCGCCTGGGGAGTACGACCGCAAGGTTGAAACTCAAAGGAATTGACGGGGGCCCGCACAAG-C-GGT-GGAGC-ATGTGG-TTT-AATTCGAAGCAACGCG-AA-GAACCTTACCAGG-TCTTGACAT--CC-CGAT-G-CCCGCT-CT-AG-AGATAGA-G-TTTTAC-----TTCTTGAAC-ATCG-G-A-G-ACAGGTGGTGCATGGTTGTCGTC-AGCTCGTGTC-GTGAGATGTTGGGTTAA-GTCCCGCAACGAGCGC-AACCC-TTAT-TGTT-A-GTTG-CCATC-A--T-T--GA-GTT--GGGCAC-TCTAGCGAGAC-TGCCG--GTAA-TAAA-C-CG-G-AGG-AAGGTGGGG-ATG-ACGTCAAA-TCATCA-TGCCCC-TT-A-TGACCT-GGGCT-ACACACGTGCTACAATGGT-TGGTACAAC-G-AGTCGCAAG-CCGGTGACGGCAA-GC-TAA--TCTC-TGAAA-G-CCA-ATCTC-AGTTCGGATTGTAGGCTGCAACTCGCCTACATGAAGTCGGAATCGCTAGTAATCGCGGATCAGCACGCCGCGG-TGAATACGTTCCC-GGGCCTT-GTACACACCGCCC-GTCACACCACGAG-AGTT-TGTA-AC-ACCCAAAGTCGG-TGAGG-TAACCT--TATA---G--GAGCCAGCCGCCTAAGGTGGGA-CAGATGATT-GGG--G-TG-AAG-TCGTAACAAGGTAGC-CGTATCGGAAGGTGCGGCTGGATCA
@@ -29,11 +29,40 @@ Ex4379; ------------------------------------------------------------------------
 Ex8385;_(reversed) -----------------------------------------------------------------------------------------------------------GGCGGACGGG-TGA-GTAACGCGTAGGTAACCTGCCTG-GTAG-CGGGGG-ATAACTATTGGAAACGAT-AGCTAA-T-A--CCGC-ATAACAG-CAGC-CGAC-A-CA-TG-T-TAG---CTGTT-TGAAAGGAGCA---ATTG--CTTCAC---TACCAGATGGACCTGCGTTGTATTAGCTAGTTGGTGAGG-TAACGG-CTCACCAAGGCAAC-GATACATAGCCGA-CCT-GA-GAGGG-TGATCGGCCA-CACTGGG-A-CTG-AGACACGG-CCCA-GA-CTCC-TACGGG-AGGCA----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Ex777; -----------------------------------------------------------------------------------------------------------GGCGGACGGG-TGA-GTAATGCGTGACTAACCTGCCTT-ACAC-TTCAGT-ATAGCTCCTGGAAACGGG-TGGTAA-T-C--CTGA-ATGTTCC-ACCA-TACC-G-CA-TG-G-TGT---GGTGG-GAAATGGT-------TTT--TTCTGG---TGTGAGATGGGGTCGCGTCCTATCAGCTTGTTGGTGGGG-TGATGG-CCTACCAAGGCTTT-GACGGGTAGCCGG-CCT-GA-GAGGG-CGGTCGGCCA-CATTGGG-A-CTG-AGATACGG-CCCA-GA-CTCC-TACGGG-AGGCAG---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Ex1924; -----------------------------------------------------------------------------------------------------------GGCGGACGGG-TGA-GTAATGCGTGACTAACCTGCCTT-ACAC-TTCAGT-ATAGCTCCTGGAAACGGG-TGGTAA-T-C--CTGA-ATGTTCC-ACCA-TACC-G-CA-TG-G-TGT---GGTGG-GAAATGGT-------TTT--TTCTGG---TGTGAGATGGGGTCGCGTCCTATCAGCTTGTTGGTGGGG-TGATGG-CCTACCAAGGCTTT-GACGGGTAGCCGG-CCT-GA-GAGGG-CGGTCGGCCA-CATTGGG-A-CTG-AGATACGG-CCCA-GA-CTCC-TACGGG-AGGCAG---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
 ```
 
+To run the code, paste the R script from this repository into your R-console, and then call it by:
 ```
 summarise_alignment_position(phylip_file)
 #e.g.
 summarise_alignment_position("/Users/alanaalexander/Downloads/Fun_times_Pangolin_data.txt")
+```
+
+It will output a \*.csv file called summarize_alignment_position.txt. Sample name is given in the left-hand column, followed by Gapped start (bp) and Gapped end (bp). These are where each sample start and end relative to the alignment in general. Ungapped start (bp) and ungapped end (bp) give the start and stop purely in terms of the reference sequence after stripping out gaps.
+```
+Sample,Gapped start (bp),Gapped end (bp),Ungapped start (bp),Ungapped end (bp)
+Ex5155;_(reversed),106,1448,106,1185
+Ex11616;_(reversed),106,1448,106,1185
+Ex5111;,107,1512,107,1237
+Ex5898;,107,1507,107,1233
+Ex3182;,107,1496,107,1225
+Ex7478;,107,1495,107,1224
+Ex10372;,107,1492,107,1222
+Ex7281;_(reversed),107,1476,107,1208
+Ex3800;,107,1458,107,1192
+Ex638;,107,1456,107,1191
+Ex4636;,107,1456,107,1191
+Ex5581;,107,1454,107,1189
+Ex2655;,107,1453,107,1188
+Ex5774;,107,1451,107,1187
+Ex11237;,107,1451,107,1187
+Ex155;,107,1450,107,1187
+Ex410;,107,1450,107,1187
+Ex451;,107,1450,107,1187
+Ex1613;,107,1450,107,1187
+Ex2239;_(reversed),107,1450,107,1187
+Ex4379;,107,1450,107,1187
+Ex8385;_(reversed),107,1450,107,1187
+Ex777;,107,1449,107,1186
+Ex1924;,107,1449,107,1186
 ```
