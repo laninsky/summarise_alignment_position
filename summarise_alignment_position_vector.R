@@ -8,11 +8,10 @@ summarise_alignment_position <- function(phylip_file) {
   # Getting the total length of the alignment
   totz_length <- nchar(refseq_seq)
   # Setting up the output matrix
-  outputmatrix <- matrix(c("Sample","Gapped start (bp)","Gapped end (bp)","Ungapped start (bp)","Ungapped end (bp)"),ncol=5,nrow=1)
+  outputmatrix <- matrix(NA,ncol=5,nrow=(length(temp)-1))
   # Starting with the first non-reference sample and looping through
-  for (i in 3:length(temp)) {
-    # Creating a temporary matrix
-    tempmatrix <- matrix(NA,ncol=5,nrow=1)
+  outputmatrix[1,] <- c("Sample","Gapped start (bp)","Gapped end (bp)","Ungapped start (bp)","Ungapped end (bp)")  
+  outputmatrix[2:(length(temp)-1),] <- matrix(unlist(lapply(3:length(temp),function(i){
     # In which we store the sample's name
     tempmatrix[1,1] <- unlist(strsplit(temp[i],"[[:space:]]"))[1]
     # Extracting the samples sequence
@@ -24,9 +23,8 @@ summarise_alignment_position <- function(phylip_file) {
     # We use these start and end alignment points to extract the reference sequence at these points and then strip out the gaps. This gives us our ungapped start and stop locations
     tempmatrix[1,4] <- nchar(gsub("-","",substr(refseq_seq, 0, as.numeric(tempmatrix[1,2]))))
     tempmatrix[1,5] <- nchar(gsub("-","",substr(refseq_seq, 0, as.numeric(tempmatrix[1,3]))))
-    # We bind these to our outputmatrix
-    outputmatrix <- rbind(outputmatrix,tempmatrix)
-  }  
+    tempmatrix
+  })),byrow=TRUE,ncol=5)  
   # And then write the whole thing out
   write.table(outputmatrix,"summarize_alignment_position.txt",quote = FALSE,row.names=FALSE,col.names=FALSE,sep=",")
 }
