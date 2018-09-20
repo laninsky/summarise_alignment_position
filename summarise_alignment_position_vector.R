@@ -24,7 +24,7 @@ summarise_alignment_position <- function(phylip_file) {
     # We use these start and end alignment points to extract the reference sequence at these points and then strip out the gaps. This gives us our ungapped start and stop locations
     tempmatrix[1,4] <- nchar(gsub("-","",substr(refseq_seq, 0, as.numeric(tempmatrix[1,2]))))
     tempmatrix[1,5] <- nchar(gsub("-","",substr(refseq_seq, 0, as.numeric(tempmatrix[1,3]))))
-    tempmatrix
+    return(tempmatrix)
   })),byrow=TRUE,ncol=5)  
   # And then write the whole thing out
   write.table(outputmatrix,"summarize_alignment_position.txt",quote = FALSE,row.names=FALSE,col.names=FALSE,sep=",")
