@@ -18,7 +18,7 @@ summarise_alignment_position <- function(phylip_file) {
     # Extracting the samples sequence
     temp_seq <- unlist(strsplit(temp[i],"[[:space:]]"))[2]
     # We first calculate where it starts relative to the total alignment by stripping out all the starting gaps
-    tempmatrix[1,2] <- totz_length-nchar(gsub("^-*","",temp_seq))
+    tempmatrix[1,2] <- totz_length-nchar(gsub("^-*","",temp_seq))+1
     # And then we do the same thing with the trailing gaps to find out where it ends
     tempmatrix[1,3] <- nchar(gsub("-*$","",temp_seq))
     # We use these start and end alignment points to extract the reference sequence at these points and then strip out the gaps. This gives us our ungapped start and stop locations
