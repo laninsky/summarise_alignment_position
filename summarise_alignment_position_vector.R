@@ -12,6 +12,7 @@ summarise_alignment_position <- function(phylip_file) {
   # Starting with the first non-reference sample and looping through
   outputmatrix[1,] <- c("Sample","Gapped start (bp)","Gapped end (bp)","Ungapped start (bp)","Ungapped end (bp)")  
   outputmatrix[2:(length(temp)-1),] <- matrix(unlist(lapply(3:length(temp),function(i){
+    tempmatrix <- matrix(NA,ncol=5,nrow=1)
     # In which we store the sample's name
     tempmatrix[1,1] <- unlist(strsplit(temp[i],"[[:space:]]"))[1]
     # Extracting the samples sequence
