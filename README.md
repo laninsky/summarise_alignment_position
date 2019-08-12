@@ -66,3 +66,6 @@ Ex8385;_(reversed),107,1450,107,1187
 Ex777;,107,1449,107,1186
 Ex1924;,107,1449,107,1186
 ```
+
+# Version history
+Wrote this as a one-off goof to help out a lab mate. I am no longer actively maintaining this repository, but will respond to issues.
